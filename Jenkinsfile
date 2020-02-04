@@ -9,6 +9,7 @@ pipeline {
             }
             steps {
                 echo 'Prepare'
+                sh 'npm install'
             }
         }
         stage('Build') {
@@ -16,7 +17,8 @@ pipeline {
                 docker { image 'node:alpine' }
             }
             steps {
-                echo 'Build'      
+                echo 'Build'     
+                sh 'npm build' 
             }
         }
         stage('Static Analysis') {
