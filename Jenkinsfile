@@ -77,12 +77,19 @@ pipeline {
             post {
                 always {
                     echo 'Cleanup'
+                    dir('ci/code'){
+                        sh 'docker-compose -f docker-compose-e2e.yml down --rmi=all -v'
+                    }
                 }
             }
         }
         stage('Deploy') {
             steps {                
                 echo 'Deploy'
+                dir('ci/code') {
+                    sh 'docker-compose -f docker-compose.yml build'
+                    sh 'docker-compose -f docker-compose.yml up -d'
+                }
             }
         }
     }
