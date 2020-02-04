@@ -54,6 +54,13 @@ pipeline {
             }
             steps {
                 echo 'Test'
+                dir('code/frontend') {
+                    sh 'npm run test'
+                }
+                echo 'Test backend'
+                dir('code/backend') {
+                    sh 'npm run test'
+                }
             }
         }
         stage('e2e Test') {
