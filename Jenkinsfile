@@ -39,6 +39,13 @@ pipeline {
             }
             steps {
                 echo 'Analyze' 
+                dir('code/frontend') {
+                    sh 'npm run lint'
+                }
+                echo 'Analyze backend'
+                dir('code/backend') {
+                    sh 'npm run lint'
+                }
             }
         }
         stage('Unit Test') {
